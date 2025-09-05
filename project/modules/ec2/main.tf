@@ -4,6 +4,7 @@ resource "aws_instance" "bastion" {
   key_name               = var.key_name
   subnet_id              = var.public_subnet_ids[0]
   vpc_security_group_ids = [var.sg_id]
+  associate_public_ip_address = true
 
   tags = { Name = "bastion-ec2" }
 }
