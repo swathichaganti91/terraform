@@ -48,8 +48,8 @@ resource "aws_lb" "backend_alb" {
   load_balancer_type = "application"
   security_groups    = [var.vpc_sg_id]
   subnets = [
-    var.backend_private_subnets[0],
-    var.backend_private_subnets[1]
+    var.frontend_public_subnets[0],
+    var.frontend_public_subnets[1]
   ]
 }
 

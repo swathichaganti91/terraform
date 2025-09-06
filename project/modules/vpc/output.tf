@@ -23,6 +23,6 @@ output "private_subnet_ids" {
 }
 #frontend_ami="ami-0ff4c8fb495a5a50d"
 #backend_ami="ami-0ff4c8fb495a5a50d"
-#sg_ids=["sg-0d089a479271d1422"]
+#vpc_security_group_ids = ["sg-0d089a479271d1422"]
 #backend_private_subnets=["subnet-0d8a177650b3fb767","subnet-0e5bd9e00bda275c5","subnet-0caf4d5c852ba8b6c","subnet-056b29ead0603af56","subnet-07ec1e4c57f8eac94","subnet-0b751a2e1033491a5"]
 #frontend_public_subnets=["subnet-04fe1f31c9dcf44b3","subnet-03ea9d15847438044"]
