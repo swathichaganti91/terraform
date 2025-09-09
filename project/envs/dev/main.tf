@@ -24,31 +24,31 @@ module "ec2" {
   frontend_ami = "ami-095887f48ad47f389" # your custom frontend AMI
   backend_ami  = "ami-0ea9161deacc4e14b" # your custom backend AMI
 }
-#resource "aws_db_subnet_group" "book_subnets" {
-#  name       = "bookdb-subnet-group"
-#  subnet_ids = [
-#    module.vpc.private_subnet_ids]
-#  tags = {
-#    Name = "bookdb-subnet-group"
-#  }
-#}
+resource "aws_db_subnet_group" "book_subnets" {
+  name       = "bookdb-subnet-group"
+  subnet_ids = [
+    module.vpc.private_subnet_ids]
+  tags = {
+    Name = "bookdb-subnet-group"
+  }
+}
 
-#module "rds" {
-#  source = "../../modules/rds"
+module "rds" {
+  source = "../../modules/rds"
 
-#  db_identifier         = "book-rds"
-#  allocated_storage     = "20"
-#  engine                = "mysql"
-#  db_name               = "bookdb"
-#  db_instance_class     = "db.t3.micro"
+  db_identifier         = "book-rds"
+  allocated_storage     = "20"
+  engine                = "mysql"
+  db_name               = "bookdb"
+  db_instance_class     = "db.t3.micro"
 
-#  db_subnet_group_name  = aws_db_subnet_group.book_subnets.name
-#  vpc_security_group_ids = [module.vpc.sg_id]
+  db_subnet_group_name  = aws_db_subnet_group.book_subnets.name
+  vpc_security_group_ids = [module.vpc.sg_id]
 
   # Use backend EC2 public IP from module
 
 #  backend_public_ip = module.ec2.backend_public_ip
-#}
+}
 
 
 

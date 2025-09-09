@@ -3,7 +3,7 @@ data "aws_secretsmanager_secret" "db" {
   
 }
 data "aws_secretsmanager_secret_version" "db" {
-    secret_id = "arn:aws:secretsmanager:ap-northeast-3:554930853277:secret:prateek-QcRKKa"
+    secret_id = data.aws_secretsmanager_secret.db.id
 }
   
 
@@ -23,30 +23,39 @@ resource "aws_db_instance" "rds" {
      db_subnet_group_name  = var.db_subnet_group_name
   vpc_security_group_ids = var.vpc_security_group_ids
 }
-resource "null_resource" "run_sql" {
-  depends_on = [ aws_db_instance.rds ]
-  
-  provisioner "file" {
-    source      = "${path.module}/test.sql"
-    destination = "/tmp/test.sql"
+#resource "null_resource" "run_sql" {
+#  depends_on = [ aws_db_instance.rds ]
+#  
+#  provisioner "file" {
+#    source      = "${path.module}/test.sql"
+#    destination = "/tmp/test.sql"
 
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("~/.ssh/id_rsa")
-      host        = var.backend_public_ip
-    }
-  }
+#    connection {
+#      type        = "ssh"
+#      user        = "ubuntu"
+#      private_key = file("~/.ssh/id_rsa")
+#      
+#       host                = var.backend_private_ip    # <-- connect to backend via private IP
+#      bastion_host        = var.bastion_public_ip     # <-- jump through bastion
+#      bastion_user        = "ubuntu"
+#      bastion_private_key = file("~/.ssh/id_rsa")
+#    }
+#  }
 
-  provisioner "remote-exec" {
-    inline = [
-      "mysql -h ${aws_db_instance.rds.address} -u ${local.db_secret["username"]} -p${local.db_secret["password"]} < /tmp/test.sql"
-    ]
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("~/.ssh/id_rsa")
-      host        = var.backend_public_ip
-    }
-  }
-}
+#  provisioner "remote-exec" {
+#    inline = [
+#      "mysql -h ${aws_db_instance.rds.address} -u ${local.db_secret["username"]} -p${local.db_secret["password"]} < /tmp/test.sql"
+#    ]
+#    connection {
+#      type        = "ssh"
+#      user        = "ubuntu"
+#      private_key = file("~/.ssh/id_rsa")
+      
+#      host                = var.backend_private_ip    # <-- connect to backend via private IP
+#      bastion_host        = var.bastion_public_ip     # <-- jump through bastion
+#      bastion_user        = "ubuntu"
+#      bastion_private_key = file("~/.ssh/id_rsa")
+
+#    }
+#  }
+#}

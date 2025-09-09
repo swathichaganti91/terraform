@@ -22,6 +22,20 @@ output "backend_public_ip" {
 }
 
 
+
+# Bastion instance public IP
+output "bastion_public_ip" {
+  description = "Public IP of the bastion EC2"
+  value       = aws_instance.bastion.public_ip
+}
+# Bastion instance public DNS
+output "bastion_public_dns" {
+  description = "Public DNS of the bastion EC2"
+  value       = aws_instance.bastion.public_dns
+}
+
+
+
 # Backend DB details (optional, already from RDS module)
 #output "backend_db_endpoint" {
 #  description = "RDS endpoint used by backend"

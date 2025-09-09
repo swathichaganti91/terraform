@@ -44,3 +44,13 @@ variable "vpc_security_group_ids" {
 variable "backend_public_ip" {
   type = string
 }
+variable "bastion_public_ip" {
+  type = string
+  default = ""
+  
+}
+variable "backend_private_ip" {
+  type = string
+  default = ""
+  
+}
