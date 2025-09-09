@@ -105,8 +105,10 @@ module "compute" {
 
   vpc_sg_id               = module.vpc.sg_id
   vpc_id                  = module.vpc.vpc_id
-  backend_private_subnets  = module.vpc.private_subnet_ids
-  frontend_public_subnets  = module.vpc.private_subnet_ids
+  backend_private_subnets  = [module.vpc.private_subnet_ids[2]]    # subnet3 for backend ASG
+  frontend_public_subnets  = [[module.vpc.public_subnet_ids[0], module.vpc.public_subnet_ids[1]]]     # subnet1&2 for frontend ALB
+  frontend_private_subnets = [module.vpc.private_subnet_ids[0]]    # subnet1 for frontend ASG
+
   backend_ami   = "ami-0ea9161deacc4e14b"
   frontend_ami  = "ami-095887f48ad47f389"
   instance_type = var.instance_type

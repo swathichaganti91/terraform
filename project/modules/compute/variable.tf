@@ -40,3 +40,7 @@ variable "vpc_id" {
   description = "VPC ID"
   type        = string
 }
+variable "frontend_private_subnets" {
+  description = "List of public subnet IDs for frontend"
+  type        = list(string)
+}
