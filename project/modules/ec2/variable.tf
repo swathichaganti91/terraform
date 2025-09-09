@@ -20,6 +20,10 @@ variable "frontend_ami" {
 variable "backend_ami" {
   type = string
 }
+variable "backend_instance_profile" {
+  type    = string
+  default = null
+}
 
 
 

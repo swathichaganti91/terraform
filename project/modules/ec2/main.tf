@@ -13,7 +13,7 @@ resource "aws_instance" "frontend" {
   ami                    = var.frontend_ami   # <-- FIXED
   instance_type          = "t3.micro"
   key_name               = var.key_name
-  subnet_id              = var.public_subnet_ids[1]
+  subnet_id              = var.private_subnet_ids[1]
   vpc_security_group_ids = [var.sg_id]
 
   tags = { Name = "frontend-ec2" }
@@ -25,6 +25,7 @@ resource "aws_instance" "backend" {
   key_name               = var.key_name
   subnet_id              = var.private_subnet_ids[0]
   vpc_security_group_ids = [var.sg_id]
+  iam_instance_profile   = var.backend_instance_profile
 
   tags = { Name = "backend-ec2" }
 }
