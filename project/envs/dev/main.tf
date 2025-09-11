@@ -71,7 +71,7 @@ module "ec2" {
 resource "aws_db_subnet_group" "book_subnets" {
   name       = "bookdb-subnet-group"
   subnet_ids = [
-    module.vpc.private_subnet_ids[1],
+    module.vpc.private_subnet_ids[4],
     module.vpc.private_subnet_ids[5]
     ]
   tags = {
