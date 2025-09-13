@@ -24,6 +24,10 @@ resource "aws_subnet" "public2" {
     cidr_block = "10.0.4.0/24"
     availability_zone = "ap-northeast-3b"
     map_public_ip_on_launch = true
+
+    tags = {
+        Name = "public2"
+    }
   
 }
 resource "aws_subnet" "private1" {
@@ -31,36 +35,60 @@ resource "aws_subnet" "private1" {
     cidr_block = "10.0.2.0/24"
     availability_zone = "ap-northeast-3a"
 
+    tags = {
+        Name = "frontendsubnet1"
+    }
+
   
 }
 resource "aws_subnet" "private2" {
     vpc_id = aws_vpc.myvpc.id
     cidr_block = "10.0.3.0/24"
     availability_zone = "ap-northeast-3b"
+
+    tags = {
+        Name = "frontendsubnet2"
+    }
   
 }
 resource "aws_subnet" "private3" {
   vpc_id = aws_vpc.myvpc.id
   cidr_block = "10.0.5.0/24"
   availability_zone = "ap-northeast-3a"
+
+  tags = {
+        Name = "backendsubnet1"
+    }
   
 }
 resource "aws_subnet" "private4" {
   vpc_id = aws_vpc.myvpc.id
   cidr_block = "10.0.6.0/24"
   availability_zone = "ap-northeast-3b"
+
+  tags = {
+        Name = "backendsubnet2"
+    }
   
 }
 resource "aws_subnet" "private5" {
   vpc_id = aws_vpc.myvpc.id
   cidr_block = "10.0.7.0/24"
   availability_zone = "ap-northeast-3a"
+
+  tags = {
+        Name = "DBsubnet1"
+    }
   
 }
 resource "aws_subnet" "private6" {
   vpc_id = aws_vpc.myvpc.id
   cidr_block = "10.0.8.0/24"
   availability_zone = "ap-northeast-3b"
+
+  tags = {
+        Name = "DBsubnet2"
+    }
   
 }
 resource "aws_db_subnet_group" "subgroup" {

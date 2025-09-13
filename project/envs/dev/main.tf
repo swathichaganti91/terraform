@@ -64,8 +64,8 @@ module "ec2" {
   public_subnet_ids  = module.vpc.public_subnet_ids
   private_subnet_ids = module.vpc.private_subnet_ids
   sg_id              = module.vpc.sg_id
-  frontend_ami = "ami-095887f48ad47f389" # your custom frontend AMI
-  backend_ami  = "ami-0ea9161deacc4e14b" # your custom backend AMI
+  frontend_ami = "ami-01c3da8ee0b4983f4" # your custom frontend AMI
+  backend_ami  = "ami-0fa0660cef5cfc62b" # your custom backend AMI
   backend_instance_profile = aws_iam_instance_profile.backend_profile.name  
 }
 resource "aws_db_subnet_group" "book_subnets" {
@@ -109,7 +109,7 @@ module "compute" {
   frontend_public_subnets  = [module.vpc.public_subnet_ids[0], module.vpc.public_subnet_ids[1]]     # subnet1&2 for frontend ALB
   frontend_private_subnets = [module.vpc.private_subnet_ids[0]]    # subnet1 for frontend ASG
 
-  backend_ami   = "ami-0ea9161deacc4e14b"
-  frontend_ami  = "ami-095887f48ad47f389"
+  backend_ami   = "ami-0fa0660cef5cfc62b"
+  frontend_ami  = "ami-01c3da8ee0b4983f4"
   instance_type = var.instance_type
 }
