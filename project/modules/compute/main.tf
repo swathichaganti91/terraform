@@ -1,9 +1,19 @@
 #######################
 # Backend Launch Template
 #######################
+data "aws_ami" "backami" {
+  most_recent = true
+  owners = [ "self" ]
+
+  filter {
+    name = "name"
+    values = [ "backami" ]
+  }
+  
+}
 resource "aws_launch_template" "backend_lt" {
   name_prefix   = "backend-lt"
-  image_id      = var.backend_ami
+  image_id      = data.aws_ami.backami.id
   instance_type = var.instance_type
 
   network_interfaces {
@@ -69,6 +79,16 @@ resource "aws_lb_listener" "backend_listener" {
 #######################
 # Frontend Launch Template
 #######################
+#data "aws_ami" "front_ami" {
+ # most_recent = true
+  #owners = [ "self" ]
+
+  #filter {
+   # name = "name"
+    #values = [ "front_ami" ]
+  #}
+  
+#}
 resource "aws_launch_template" "frontend_lt" {
   name_prefix   = "frontend-lt"
   image_id      = var.frontend_ami
