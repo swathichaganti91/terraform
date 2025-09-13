@@ -19,37 +19,33 @@ resource "aws_db_instance" "rds" {
     db_name = var.db_name
     username = local.db_secret["username"]
     password = local.db_secret["password"]
-    db_subnet_group_name = module.vpc.db_subnet_group_name
-    vpc_security_group_ids = [module.vpc.sg_id]
+     db_subnet_group_name  = var.db_subnet_group_name
+  vpc_security_group_ids = var.vpc_security_group_ids
 }
 resource "null_resource" "run_sql" {
-    depends_on = [ aws_db_instance.rds, aws_instance.backend ]
-    provisioner "file" {
-        source = "${path.module}/test.sql"
-        destination = "/tmp/test.sql"
-
-        connection {
-          type = "ssh"
-          user = "ec2-  user"
-          private_key = file("~/.ssh/id_rsa")
-          host = aws_instance.backend.public_ip
-          
-        }
-      
-    }
-    provisioner "remote-exec" {
-        inline = [ 
-            "mysql -h ${aws_db_instance.rds.address} -u ${local.db_secret["username"]} -p${local.db_secret["password"]} < /tmp/test.sql"
-         ]
-         connection {
-             type = "ssh"
-             user = "ec2-user"
-             private_key = file("~/.ssh/id_rsa")
-             host = aws_instance.backend.public_ip
-         }
-    }
+  depends_on = [ aws_db_instance.rds ]
   
+  provisioner "file" {
+    source      = "${path.module}/test.sql"
+    destination = "/tmp/test.sql"
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file("~/.ssh/id_rsa")
+      host        = var.backend_ip
+    }
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "mysql -h ${aws_db_instance.rds.address} -u ${local.db_secret["username"]} -p${local.db_secret["password"]} < /tmp/test.sql"
+    ]
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file("~/.ssh/id_rsa")
+      host        = var.backend_ip
+    }
+  }
 }
-
-  
-

@@ -1,21 +1,25 @@
-variable "ami_id" {
-    type = string
-    default = ""
-  
+variable "key_name" {
+  type = string
 }
-variable "instance_type" {
-    type = string
-    default = ""
-  
+
+variable "public_subnet_ids" {
+  type = list(string)
 }
-variable "subnet_id" {
-  
+
+variable "private_subnet_ids" {
+  type = list(string)
 }
-variable "env" {
-  
+
+variable "sg_id" {
+  type = string
 }
-variable "Key_name" {
-    type = string
-    default = ""
-  
+variable "frontend_ami" {
+  type = string
 }
+
+variable "backend_ami" {
+  type = string
+}
+
+
+

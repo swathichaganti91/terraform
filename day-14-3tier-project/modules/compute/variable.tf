@@ -1,4 +1,8 @@
-variable "ami_id" {
+variable "backend_ami_id" {
+    type = string
+  
+}
+variable "frontend_ami_id" {
     type = string
   
 }

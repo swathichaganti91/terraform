@@ -11,7 +11,7 @@ resource "aws_vpc" "myvpc" {
 resource "aws_subnet" "public1" {
     vpc_id = aws_vpc.myvpc.id
     cidr_block = "10.0.1.0/24"
-    availability_zone = "ap-south-1a"
+    availability_zone = "ap-northeast-3a"
     map_public_ip_on_launch = true
 
     tags = {
@@ -22,45 +22,45 @@ resource "aws_subnet" "public1" {
 resource "aws_subnet" "public2" {
     vpc_id = aws_vpc.myvpc.id
     cidr_block = "10.0.4.0/24"
-    availability_zone = "ap-south-1b"
+    availability_zone = "ap-northeast-3b"
     map_public_ip_on_launch = true
   
 }
 resource "aws_subnet" "private1" {
     vpc_id = aws_vpc.myvpc.id
     cidr_block = "10.0.2.0/24"
-    availability_zone = "ap-south-1c"
+    availability_zone = "ap-northeast-3c"
 
   
 }
 resource "aws_subnet" "private2" {
     vpc_id = aws_vpc.myvpc.id
     cidr_block = "10.0.3.0/24"
-    availability_zone = "ap-south-1b"
+    availability_zone = "ap-northeast-3b"
   
 }
 resource "aws_subnet" "private3" {
   vpc_id = aws_vpc.myvpc.id
   cidr_block = "10.0.5.0/24"
-  availability_zone = "ap-south-1b"
+  availability_zone = "ap-northeast-3b"
   
 }
 resource "aws_subnet" "private4" {
   vpc_id = aws_vpc.myvpc.id
   cidr_block = "10.0.6.0/24"
-  availability_zone = "ap-south-1c"
+  availability_zone = "ap-northeast-3c"
   
 }
 resource "aws_subnet" "private5" {
   vpc_id = aws_vpc.myvpc.id
   cidr_block = "10.0.7.0/24"
-  availability_zone = "ap-south-1a"
+  availability_zone = "ap-northeast-3a"
   
 }
 resource "aws_subnet" "private6" {
   vpc_id = aws_vpc.myvpc.id
   cidr_block = "10.0.8.0/24"
-  availability_zone = "ap-south-1a"
+  availability_zone = "ap-northeast-3a"
   
 }
 resource "aws_db_subnet_group" "subgroup" {

@@ -18,17 +18,17 @@ output "backend_private_ip" {
 }
 
 output "backend_public_ip" {
-  description = "Public IP of the backend EC2 (if needed for SSH/debug)"
-  value       = aws_instance.backend.public_ip
+  value = aws_instance.backend.public_ip
 }
+
 
 # Backend DB details (optional, already from RDS module)
-output "backend_db_endpoint" {
-  description = "RDS endpoint used by backend"
-  value       = module.rds.db_endpoint
-}
+#output "backend_db_endpoint" {
+#  description = "RDS endpoint used by backend"
+#  value       = module.rds.db_endpoint
+#}
 
-output "backend_db_name" {
-  description = "Database name"
-  value       = module.rds.db_name
-}
+#output "backend_db_name" {
+#  description = "Database name"
+#  value       = module.rds.db_name
+#}
